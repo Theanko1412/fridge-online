@@ -412,7 +412,8 @@ const App = () => {
                 >
                   <CircleNotificationsIcon />
                 </Button>
-              ) : (
+              ) : ("serviceWorker" in navigator &&
+                  "vibrate" in window &&
                 // just display vibration button if backsync is not supported (couldnt find browser that would support vibration on mobile so its just demonstration)
                 <Button
                   variant="contained"
