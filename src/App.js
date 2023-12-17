@@ -113,7 +113,7 @@ const App = () => {
 
     try {
       //if browser supports background sync and sync manager add item with it else call immediately
-      if ("serviceWorker" in navigator && "SyncManager" in window) {
+      if ("serviceWorker" in navigator && "SyncManager" in window && !isOnline) {
         const action = "add";
         const id = `${action}-${newItem.name}`;
         set(id, { action, newItem });
@@ -132,7 +132,9 @@ const App = () => {
           }
         }, 1500);
       } else {
-        console.log("Your browser does not support background sync.");
+        if (!isOnline) {
+          console.log("Your browser does not support background sync.");
+        }
         const response = await fetch("/add", {
           method: "POST",
           headers: {
@@ -157,7 +159,7 @@ const App = () => {
   //same logic as addItem
   const handleDeleteItem = async (itemName) => {
     try {
-      if ("serviceWorker" in navigator && "SyncManager" in window) {
+      if ("serviceWorker" in navigator && "SyncManager" in window && !isOnline) {
         const action = "delete";
         const id = `${action}-${itemName}`;
         set(id, { action, itemName });
@@ -175,7 +177,9 @@ const App = () => {
           }
         }, 1500);
       } else {
-        console.log("Your browser does not support background sync.");
+        if (!isOnline) {
+          console.log("Your browser does not support background sync.");
+        }
         const response = await fetch(`/delete/${itemName}`, {
           method: "DELETE",
         });
