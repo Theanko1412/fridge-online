@@ -25,6 +25,11 @@ Or build docker image and run it:
 docker build -t fridge-online .
 ```
 
+Or 
+```
+npm run serve
+```
+
 
 ## Features
 Native-api (network-info) - just as demonstration, plan was to use barcode scanner api
@@ -42,5 +47,10 @@ Push notifications - notifications are sent when item is added, expired or about
 
 ## Some barcodes to test it out
 ```
-
+4000539750007
+7610400082549
+5449000239280
+5053990167845
+8015997000201
+5000159023283
 ```
