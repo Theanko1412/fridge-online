@@ -447,6 +447,7 @@ const App = () => {
           <Button variant="contained" color="primary" onClick={handleUpcLookup}>
             Lookup UPC
           </Button>
+          <span>(this was supposed to be barcode scanner, but it doesnt work on any new browsers, use some codes from README, some of your codes or just ignore this and input unique name)</span>
           {/* if lookup was successful autofill item name - can be changed */}
           <TextField
             label="Name"

@@ -38,3 +38,9 @@ Offline - application is avaliable when offline, all requests are kept in indexe
 Background sync - all requests are sent when online
 
 Push notifications - notifications are sent when item is added, expired or about to expire
+
+
+## Some barcodes to test it out
+```
+
+```
