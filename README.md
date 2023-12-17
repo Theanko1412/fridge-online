@@ -28,8 +28,13 @@ docker build -t fridge-online .
 
 ## Features
 Native-api (network-info) - just as demonstration, plan was to use barcode scanner api
+
 Installable - PWA
+
 Caching - all requests are cached and avaliable when offline
+
 Offline - application is avaliable when offline, all requests are kept in indexeddb and sent when online
+
 Background sync - all requests are sent when online
+
 Push notifications - notifications are sent when item is added, expired or about to expire
