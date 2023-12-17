@@ -25,6 +25,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { get, set } from "idb-keyval";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
+import VibrationIcon from '@mui/icons-material/Vibration';
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -82,7 +83,7 @@ const App = () => {
   }, []);
 
 
-  
+
   /* 
   all handlers - nothing special just state changes
   */
@@ -106,8 +107,7 @@ const App = () => {
   //more important handlers with logic, adding, deleting, UPC lookup
   const handleAddItem = async () => {
     const newItem = {
-      //if user "scanned"/looker up upc, then take its title, else just input name
-      name: upcResult ? upcResult.title : newItemName,
+      name: newItemName,
       expDate: newItemExpDate,
     };
 
@@ -125,7 +125,9 @@ const App = () => {
         handleAddDialogClose();
         //calling fetch data with timeout so my page is refreshed after item is added
         setTimeout(() => {
-          fetchData();
+          if (isOnline) {
+            fetchData();
+          }
         }, 1500);
       } else {
         console.log("Your browser does not support background sync.");
@@ -164,7 +166,9 @@ const App = () => {
         console.log("Queued for sync: ", itemName);
         handleAddDialogClose();
         setTimeout(() => {
-          fetchData();
+          if (isOnline) {
+            fetchData();
+          }
         }, 1500);
       } else {
         console.log("Your browser does not support background sync.");
@@ -395,16 +399,25 @@ const App = () => {
               </Button>
               {/* if users device accepts notifications AND he still didnt click yes or no display this item so popup *do you want notifications* apears */}
               {!notificationPerm &&
-                "serviceWorker" in navigator &&
-                "SyncManager" in window && (
-                  <Button
-                    variant="contained"
-                    color="info"
-                    onClick={grantNotificationPermission}
-                  >
-                    <CircleNotificationsIcon />
-                  </Button>
-                )}
+              "serviceWorker" in navigator &&
+              "SyncManager" in window ? (
+                <Button
+                  variant="contained"
+                  color="info"
+                  onClick={grantNotificationPermission}
+                >
+                  <CircleNotificationsIcon />
+                </Button>
+              ) : (
+                // just display vibration button if backsync is not supported (couldnt find browser that would support vibration on mobile so its just demonstration)
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => navigator.vibrate(500)}
+                >
+                  <VibrationIcon />
+                </Button>
+              )}
             </>
           </div>
         </Toolbar>
