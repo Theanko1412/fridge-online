@@ -125,8 +125,10 @@ const App = () => {
         handleAddDialogClose();
         //calling fetch data with timeout so my page is refreshed after item is added
         setTimeout(() => {
-          if (isOnline) {
+          try {
             fetchData();
+          } catch (error) {
+            console.error("Error fetching data:", error);
           }
         }, 1500);
       } else {
@@ -166,8 +168,10 @@ const App = () => {
         console.log("Queued for sync: ", itemName);
         handleAddDialogClose();
         setTimeout(() => {
-          if (isOnline) {
+          try {
             fetchData();
+          } catch (error) {
+            console.error("Error fetching data:", error);
           }
         }, 1500);
       } else {
