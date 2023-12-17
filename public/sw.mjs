@@ -128,11 +128,11 @@ let syncItems = async function () {
               if (res.ok) {
                 res.json().then(function (data) {
                   console.log("Deleting from idb:", entry.newItem.name);
-                  del(entry.newItem.name);
+                  del("add-" + entry.newItem.name);
                 });
               } else if (res.status === 409) {
                 console.log("Name: ", entry.newItem.name, " already exists");
-                del(entry.newItem.name);
+                del("add-" + entry.newItem.name);
               } else {
                 console.log(res);
               }
@@ -162,11 +162,11 @@ let deleteItems = async function () {
               if (res.ok) {
                 res.json().then(function (data) {
                   console.log("Deleting from idb:", entry.itemName);
-                  del(entry.itemName);
+                  del("delete-" + entry.itemName);
                 });
               } else if (res.status === 404) {
                 console.log("Name: ", entry.itemName, " not found");
-                del(entry.itemName);
+                del("delete-" + entry.itemName);
               } else {
                 console.log(res);
               }

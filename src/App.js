@@ -114,8 +114,8 @@ const App = () => {
     try {
       //if browser supports background sync and sync manager add item with it else call immediately
       if ("serviceWorker" in navigator && "SyncManager" in window) {
-        const id = Date.now();
         const action = "add";
+        const id = `${action}-${newItem.name}`;
         set(id, { action, newItem });
 
         const registration = await navigator.serviceWorker.ready;
@@ -158,8 +158,8 @@ const App = () => {
   const handleDeleteItem = async (itemName) => {
     try {
       if ("serviceWorker" in navigator && "SyncManager" in window) {
-        const id = Date.now();
         const action = "delete";
+        const id = `${action}-${itemName}`;
         set(id, { action, itemName });
 
         const registration = await navigator.serviceWorker.ready;
